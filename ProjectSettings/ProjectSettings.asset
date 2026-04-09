@@ -924,11 +924,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: 78ed7d72-eb04-402a-8361-3628b12b1a96
+  cloudProjectId: 983352d1-eb18-4389-8e87-81d51aa81557
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: R.A.Y
-  organizationId: megumin6733
+  organizationId: berkgamer89
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
