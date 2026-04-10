@@ -35,7 +35,6 @@ public class ConnectionManager : MonoBehaviour
         Debug.Log("[Multiplayer] Host başlatılıyor...");
         try
         {
-            // 2 kişilik yer ayır
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(2);
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
@@ -87,7 +86,6 @@ public class ConnectionManager : MonoBehaviour
             bool success = NetworkManager.Singleton.StartClient();
             Debug.Log("[Multiplayer] Client (2. Oyuncu) başlatma sonucu: " + (success ? "BAŞARILI" : "BAŞARISIZ"));
 
-            // Bağlantı durumunu takip et
             NetworkManager.Singleton.OnClientConnectedCallback += (id) => {
                 Debug.Log("[Multiplayer] BAĞLANTI TAMAMLANDI! Bağlanan Client ID: " + id);
             };
