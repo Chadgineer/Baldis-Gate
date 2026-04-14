@@ -1,0 +1,12 @@
+ Multiplayer Implementation Summary 
+For this project, we implemented a 2-player remote multiplayer system using Unity 6 and Netcode for GameObjects (NGO). Our focus was on creating a lightweight, functional architecture for remote play. We downloaded the necessary assets from Unity Multiplayer Center.
+
+Key Technical Details:
+
+Architecture: We used a Distributed Authority (Host-Client) model. One player acts as the host, managing the session while playing, which eliminates the need for a dedicated server.
+
+Connectivity: To bypass NAT and port-forwarding issues, we integrated Unity Relay. The system generates a 6-digit Join Code on the host side, which the client uses to establish a tunnel via Unity's transport layer.
+
+Workflow: We utilized Unity Services (UGS) for anonymous authentication and the Multiplayer Play Mode for simultaneous edge-case testing within the editor.
+
+This setup ensures a stable, low-latency connection for remote 2-player sessions using Unity’s most modern networking stack.
