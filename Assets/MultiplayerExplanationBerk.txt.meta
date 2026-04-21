@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/MultiplayerExplanationBerk.txt.meta
 guid: 5558ba397862fc4489a6bea88b71e891
 TextScriptImporter:
+=======
+guid: 255e5560ee6cfea40b3fe4197aa82e11
+DefaultImporter:
+>>>>>>> Stashed changes:Assets/GDD/GAME DESIGN ALBUM.pdf.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
