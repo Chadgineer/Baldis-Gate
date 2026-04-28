@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Unity.Netcode; 
+using Unity.Netcode;
 
-public class PlayerMovement : NetworkBehaviour 
+public class PlayerMovement : NetworkBehaviour
 {
     public float moveSpeed = 5f;
     private Rigidbody2D rb;
