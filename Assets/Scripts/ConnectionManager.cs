@@ -13,6 +13,7 @@ public class ConnectionManager : MonoBehaviour
     [Header("UI & Settings")]
     public TMP_InputField codeInputField;
     public string sceneToLoad = "GameScene"; // Inspector'dan oyun sahnenein adını yaz
+    public static string lastGeneratedCode;
 
     async void Start()
     {
@@ -26,6 +27,7 @@ public class ConnectionManager : MonoBehaviour
         // 1. Relay Odası Aç (Max 2 kişi)
         Allocation allocation = await RelayService.Instance.CreateAllocationAsync(2);
         string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+        lastGeneratedCode = joinCode;
 
         Debug.Log("Oda Kodu: " + joinCode);
         if (codeInputField != null) codeInputField.text = joinCode;

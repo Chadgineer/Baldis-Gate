@@ -1,22 +1,27 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using TMPro;
 using Unity.Netcode;
 
 public class LobbyUI : MonoBehaviour
 {
-    [Header("UI Elemanlarý")]
+    [Header("UI ElemanlarÄ±")]
+    private ConnectionManager connectionManager;
     public GameObject waitingCanvas; // "Oyuncu bekleniyor" objesi
     public TextMeshProUGUI roomCodeText; // "Oda kodu" yazan TMP
 
     void Start()
     {
-        // Baþlangýçta aktif et
+        connectionManager = FindAnyObjectByType<ConnectionManager>();
         waitingCanvas.SetActive(true);
-
-        // Host ise kodu yazdýr
-        if (NetworkManager.Singleton.IsHost)
+        if (NetworkManager.Singleton.ConnectedClientsList.Count >= 2)
         {
-            roomCodeText.text = "Oda Kodu: " + "..."; 
+            waitingCanvas.SetActive(false);
+            roomCodeText.gameObject.SetActive(false);
+        }
+        
+        else if (NetworkManager.Singleton.IsHost)
+        {
+            roomCodeText.text = "Oda Kodu: " + ConnectionManager.lastGeneratedCode; 
         }
         else
         {

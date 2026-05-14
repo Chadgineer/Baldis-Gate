@@ -1,35 +1,39 @@
-using UnityEngine;
+﻿using UnityEngine;
+using Unity.Netcode;
 
-public class HealthManager : MonoBehaviour
+public class HealthManager : NetworkBehaviour
 {
-    public int maxHealth = 100;
-    private int currentHealth;
-    void Start()
-    {
-        currentHealth = maxHealth;
-    }
+    // NetworkVariable kullanarak can değerini tüm clientlarda senkronize tutuyoruz
+    public NetworkVariable<float> currentHealth = new NetworkVariable<float>(100f);
 
-    public void TakeDamage(int damage)
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)] // Sahibi olmasak da (ışın değerince) hasar verebilmek için Everyone
+    public void TakeDamageServerRpc(float damage)
     {
-        currentHealth -= damage;
-        if (currentHealth <= 0)
+        // Hasar hesaplaması sadece Server'da yapılır
+        currentHealth.Value -= damage;
+
+        if (currentHealth.Value <= 0)
         {
             Die();
         }
     }
 
-    public void Heal(int amount)
+    private void Die()
     {
-        currentHealth += amount;
-        if (currentHealth > maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
-    }
+        if (!IsServer) return;
 
-    void Die()
-    {
-        Debug.Log("Character died!");
-        gameObject.SetActive(false);
+        if (CompareTag("Player"))
+        {
+            // Oyuncu ölme mantığı: Örneğin başlangıç noktasına ışınla
+            transform.position = Vector3.zero;
+            currentHealth.Value = 100f; // Canı yenile
+            Debug.Log("Oyuncu öldü ve respawn oldu.");
+        }
+        else
+        {
+            // Düşman ölme mantığı: Objeyi ağdan kaldır ve yok et
+            GetComponent<NetworkObject>().Despawn();
+            Destroy(gameObject);
+        }
     }
 }
